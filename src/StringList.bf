@@ -85,13 +85,13 @@ namespace Beef_Net
 
 			_delimiter = ',';
 			_quoteChar = '"';
- 			_strictDelimiter = false;
+			_strictDelimiter = false;
 
 			GetDelimitedText(aOutStr);
 
 			_delimiter = c1;
 			_quoteChar = c2;
- 			_strictDelimiter = fsd;
+			_strictDelimiter = fsd;
 		}
 
 		public void SetCommaText(StringView aStr)
@@ -103,7 +103,7 @@ namespace Beef_Net
 			_quoteChar = '"';
 
 			SetDelimitedText(aStr);
-			
+
 			_delimiter = c1;
 			_quoteChar = c2;
 		}
@@ -140,7 +140,7 @@ namespace Beef_Net
 
 			if (aStr.Length - aPos <= 0)
 				return false;
-			
+
 			StringView tmp = aStr.Substring(aPos);
 			int idx = tmp.IndexOf(_lineBreak, 0);
 
@@ -175,7 +175,7 @@ namespace Beef_Net
 					'\x00', '\x01', '\x02', '\x03', '\x04', '\x05', '\x06', '\x07', '\x08', '\x09', '\x0A', '\x0B', '\x0C', '\x0D', '\x0E', '\x0F',
 					'\x10', '\x11', '\x12', '\x13', '\x14', '\x15', '\x16', '\x17', '\x18', '\x19', '\x1A', '\x1B', '\x1C', '\x1D', '\x1E', '\x1F',
 					'\x20', _quoteChar, _delimiter
-				);
+					);
 
 			// Check for break characters and quote if required.
 			for (int i = 0; i < Count; i++)
@@ -253,7 +253,7 @@ namespace Beef_Net
 					{
 						if (aStr[i] == _quoteChar)
 						{
-       						// Next string is quoted
+							   // Next string is quoted
 							j = i + 1;
 
 							while (j < aStr.Length && (aStr[j] != _quoteChar || (j + 1 < aStr.Length && aStr[j + 1] == _quoteChar)))
@@ -266,13 +266,13 @@ namespace Beef_Net
 
 							// j is position of closing quote
 							String tmp = new .(aStr.Substring(i + 1, j - i - 1));
-							tmp.Replace(scope .(_quoteChar, 2), scope .(_quoteChar, 1));
+							tmp.Replace(scope String(_quoteChar, 2), scope String(_quoteChar, 1));
 							Add(tmp);
 							i = j + 1;
 						}
 						else
 						{
-       						// Next string is not quoted; read until delimiter
+							   // Next string is not quoted; read until delimiter
 							j = i;
 
 							while (j < aStr.Length && aStr[j] != _delimiter)
@@ -294,7 +294,7 @@ namespace Beef_Net
 			{
 				while (i < aStr.Length)
 				{
-     				// skip delimiter
+					 // skip delimiter
 					if (notFirst && i < aStr.Length && aStr[i] == _delimiter)
 						i++;
 
@@ -307,7 +307,7 @@ namespace Beef_Net
 					{
 						if (aStr[i] == _quoteChar)
 						{
-       						// Next string is quoted
+							   // Next string is quoted
 							j = i + 1;
 
 							while (j < aStr.Length && (aStr[j] != _quoteChar || (j + 1 < aStr.Length && aStr[j + 1] == _quoteChar)))
@@ -320,7 +320,7 @@ namespace Beef_Net
 
 							// j is position of closing quote
 							String tmp = new .(aStr.Substring(i + 1, j - i - 1));
-							tmp.Replace(scope .(_quoteChar, 2), scope .(_quoteChar, 1));
+							tmp.Replace(scope String(_quoteChar, 2), scope String(_quoteChar, 1));
 							Add(tmp);
 							i = j + 1;
 						}

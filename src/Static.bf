@@ -701,10 +701,15 @@ namespace Beef_Net
 			Crypto.ERR_load_CRYPTO_strings();
 			SSL.load_error_strings();
 
-			errbio = BIO.new_fp(((FileStream)Console.Error.[Friend]mStream).[Friend]mBfpFile, BIO.NOCLOSE);
-			outbio = BIO.new_fp(((FileStream)Console.Out.[Friend]mStream).[Friend]mBfpFile, BIO.NOCLOSE);
-			inbio = BIO.new_fp(((FileStream)Console.In.[Friend]mStream).[Friend]mBfpFile, BIO.NOCLOSE);
-			BIO.printf(outbio, OpenSSL.init_ssl(0, null) < 0 ? "Could not initialize the OpenSSL library !\n" : "OpenSSL library initialized!\n");
+			var errorStream = Console.Error.[Friend]mStream as FileStream;
+			var outStream = Console.Out.[Friend]mStream as FileStream;
+			var inStream = Console.In.[Friend]mStream as FileStream;
+
+			errbio = errorStream != null ? BIO.new_fp(errorStream.[Friend]mBfpFile, BIO.NOCLOSE) : null;
+			outbio = outStream != null ? BIO.new_fp(outStream.[Friend]mBfpFile, BIO.NOCLOSE) : null;
+			inbio = inStream != null ? BIO.new_fp(inStream.[Friend]mBfpFile, BIO.NOCLOSE) : null;
+			if (outbio != null)
+				BIO.printf(outbio, OpenSSL.init_ssl(0, null) < 0 ? "Could not initialize the OpenSSL library !\n" : "OpenSSL library initialized!\n");
 		}
 
 		public static void Beef_Net_Cleanup()

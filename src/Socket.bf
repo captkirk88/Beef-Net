@@ -5,7 +5,7 @@ namespace Beef_Net
 {
 	public enum SocketState
 	{
-		ServerSocket = 0x00,
+		ServerSocket = 0x40,
 		Blocking = 0x01,
 		ReuseAddress = 0x02,
 		CanSend = 0x04,
